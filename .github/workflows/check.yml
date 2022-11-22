@@ -1,0 +1,58 @@
+---
+name: Check terraform code
+
+on:
+  pull_request:
+
+jobs:
+  # Chosen to have each of the jobs independent. Bulkier but faster.
+  validate_code:
+    runs-on: self-hosted
+    environment: demo
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_user: ${{ secrets.VCD_USER }}
+      TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
+      TF_VAR_vm_image: 'Ubuntu20-Mini'
+      TF_VAR_org: 'aucloud-demo'
+      TF_VAR_vdc: 'terraform-demo'
+      TF_VAR_url: 'https://api-vcd-sz101.eportal.australiacloud.com.au/api'
+      TF_VAR_edge_gateway: 'terraform-demo ESGW'
+      TF_VAR_network_public_ip: '103.74.201.22'
+      TF_VAR_network_public_vip: '103.74.201.23'
+      TF_VAR_network_addr: '10.100.0'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.2.1"
+
+      # Next 3 steps run tflint which enforces style guides
+      - uses: terraform-linters/setup-tflint@v2
+        name: Setup TFLint
+        with:
+          tflint_version: v0.36.2 # latest
+
+      - name: Init TFLint
+        run: tflint --init
+
+      - name: Run TFLint 
+        run: tflint -f default
+
+      - name: Terraform Init
+        run: terraform init
+
+      # This enforces consistent formatting of the terraform codebase. 
+      - name: Terraform format
+        run: terraform fmt -recursive -check
+
+
+      # This checks for bad references 
+      - name: Terraform validate
+        run: terraform validate
+
+      # This step reaches out to the apis which you are trying to configure and attempts to measure the difference.
+      # This step *WILL* fail if the network is unreachable
+      - name: Terraform plan
+        run: terraform plan

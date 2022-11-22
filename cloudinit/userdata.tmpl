@@ -1,0 +1,24 @@
+#cloud-config
+preserve_hostname: false
+hostname: ${hostname}
+fqdn: ${hostname}.example.com
+
+packages_update: true
+packages_upgrade: true
+
+packages:
+ - whois
+ - apache2
+
+users:
+  - name: demo
+    lock_passwd: false
+    passwd: $6$rounds=4096$zd4WV1g8M$3N3ZKloSku6.4YiyhdCzceYeYr0bPHybgGDMX1lCItqDQmwO1AZtskj.xjr5z23pFFkTBmRZ8Rf5voK5Kq7a00
+    sudo:  ALL=(ALL) NOPASSWD:ALL
+
+final_message: "System initialisation finished after $UPTIME seconds"
+
+power_state:
+ delay: now
+ mode: poweroff
+ condition: True

@@ -1,0 +1,50 @@
+---
+name: ONLY destroy the resources managed by terraform
+
+on:
+  # this is only manually triggered.
+  workflow_dispatch:
+
+jobs:
+  stage:
+    runs-on: self-hosted
+    environment: demo
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_user: ${{ secrets.VCD_USER }}
+      TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
+      TF_VAR_vm_image: 'Ubuntu20-Mini'
+      TF_VAR_org: 'aucloud-demo'
+      TF_VAR_vdc: 'terraform-demo'
+      TF_VAR_url: 'https://api-vcd-sz101.eportal.australiacloud.com.au/api'
+      TF_VAR_edge_gateway: 'terraform-demo ESGW'
+      TF_VAR_network_public_ip: '103.74.201.22'
+      TF_VAR_network_public_vip: '103.74.201.23'
+      TF_VAR_network_addr: '10.100.0'
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.18.1"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.2.1"
+    
+      - name: Terraform Init
+        run: terraform init
+
+      # This destroys everything. use -target to destroy specific resources in workflow.
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
+
+      # this hook recreates 
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.WRITE_ACCESS_TOKEN }} # this is a github personal access token with the correct rights.
+          repository: demos/terraform-vcd-template
+          event-type: apply-terraform-demo

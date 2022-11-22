@@ -1,0 +1,56 @@
+---
+name: Apply terraform
+
+on:
+  # Executes when code is committed / merged to main
+  push:
+    branches:
+      - main
+  # Hook to allow composite workflows
+  repository_dispatch:
+    type: ['apply-terraform-demo'] # Type should be meaningful
+  # Exposes a 'run now' hook
+  workflow_dispatch:
+jobs:
+  # Note: jobs are not guaranteed to execute in order unless constrained to do so
+  apply_terraform: # should be a meaningful name
+    runs-on: ['self-hosted'] # self hosted always must exist.
+    # Environments are not required for this workflow, however, are used for future proofing
+    environment: demo
+    # Env exposes environmental variables, such as secrets, to each of the steps below. This can be set for all steps here, or within each step.
+
+    env:
+      # access keys for cloudian required 
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      TF_VAR_user: ${{ secrets.VCD_USER }}
+      TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
+      TF_VAR_vm_image: 'Ubuntu20-Mini'
+      TF_VAR_org: 'aucloud-demo'
+      TF_VAR_vdc: 'terraform-demo'
+      TF_VAR_url: 'https://api-vcd-sz101.eportal.australiacloud.com.au/api'
+      TF_VAR_edge_gateway: 'terraform-demo ESGW'
+      TF_VAR_network_public_ip: '103.74.201.22'
+      TF_VAR_network_public_vip: '103.74.201.23'
+      TF_VAR_network_addr: '10.100.0'
+    steps:
+      # Checks out your code
+      - uses: actions/checkout@v2
+      # required for custom modules
+      - uses: actions/setup-go@v2
+        with:
+          go-version: "1.18.1"
+      # Don't ask - required for setup terraform
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.2.1"
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform apply
+        run: terraform apply -auto-approve
+          
