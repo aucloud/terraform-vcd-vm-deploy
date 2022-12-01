@@ -1,3 +1,8 @@
+/*
+	Copyright (C) 2022 Sovereign Cloud Australia Pty. Ltd.
+	All rights reserved.
+*/
+
 data "vcd_org_vdc" "nsxt_vdc" {
   name = var.vdc
 }

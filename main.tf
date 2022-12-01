@@ -9,10 +9,10 @@
 */
 
 resource "vcd_vapp_vm" "demo_vm" {
-  name          = "demo-vm"
+  name          = var.vm_name
   vapp_name     = vcd_vapp.network_app.name
-  catalog_name  = "demo"
-  template_name = "Ubuntu 20.04 Server (demo)"
+  catalog_name  = var.catalog_name
+  template_name = var.template_name
 
   memory    = 4096
   cpus      = 2
@@ -27,11 +27,11 @@ resource "vcd_vapp_vm" "demo_vm" {
   }
 
   guest_properties = {
-    "hostname" = "demovm"
+    "hostname" = var.demo_hostname
     "meta-data" = base64encode(templatefile("cloudinit/metadata.tmpl", {
     }))
     "user-data" = base64encode(templatefile("cloudinit/userdata.tmpl", {
-      "hostname" = "demovm"
+      "hostname" = var.demo_hostname
     }))
   }
 
