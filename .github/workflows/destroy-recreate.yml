@@ -16,10 +16,6 @@ jobs:
       TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-go@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: 16
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.2.1"

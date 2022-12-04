@@ -30,13 +30,12 @@ jobs:
       - name: Run TFLint 
         run: tflint -f default
 
-      - name: Terraform Init
-        run: terraform init -backend-config=backend.hcl
-
       # This enforces consistent formatting of the terraform codebase. 
       - name: Terraform format
         run: terraform fmt -recursive -check
 
+      - name: Terraform Init
+        run: terraform init -backend-config=backend.hcl
 
       # This checks for bad references 
       - name: Terraform validate

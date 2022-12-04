@@ -13,7 +13,7 @@ on:
   workflow_dispatch:
 jobs:
   # Note: jobs are not guaranteed to execute in order unless constrained to do so
-  apply_terraform: # should be a meaningful name
+  build_IAC: # should be a meaningful name
     runs-on: ubuntu-latest
     # Environments are not required for this workflow, however, are used for future proofing
     environment: demo
@@ -25,15 +25,9 @@ jobs:
       TF_VAR_user: ${{ secrets.VCD_USER }}
       TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
 
-    if: github.server_url    == 'https://github.com'
-    runs-on: ubuntu-latest
-
     steps:
       # Checks out your code
       - uses: actions/checkout@v2
-      # required for custom modules
-      - uses: actions/setup-go@v2
-      - uses: actions/setup-node@v2
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.2.1"
