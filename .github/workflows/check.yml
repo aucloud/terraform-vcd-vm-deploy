@@ -21,14 +21,14 @@ jobs:
           terraform_version: "1.2.1"
 
       # Next 3 steps run tflint which enforces style guides
-      - uses: terraform-linters/setup-tflint@v2
-        name: Setup TFLint
+      # - uses: terraform-linters/setup-tflint@v2
+      #   name: Setup TFLint
 
-      - name: Init TFLint
-        run: tflint --init
+      # - name: Init TFLint
+      #   run: tflint --init
 
-      - name: Run TFLint 
-        run: tflint -f default
+      # - name: Run TFLint 
+      #   run: tflint -f default
 
       # This enforces consistent formatting of the terraform codebase. 
       - name: Terraform format
