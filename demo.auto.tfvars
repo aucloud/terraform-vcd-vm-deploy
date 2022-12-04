@@ -2,7 +2,7 @@
 	Copyright (C) 2022 Sovereign Cloud Australia Pty. Ltd.
 	All rights reserved.
 */
-
+#Please create the catalog and ensure template is available before attempting to build.
 org = "aucloud-demo"
 vdc = "terraform-demo"
 url = "https://api-vcd-sz101.eportal.australiacloud.com.au/api"

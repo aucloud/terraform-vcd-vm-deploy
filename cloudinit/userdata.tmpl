@@ -1,4 +1,7 @@
 #cloud-config
+#Please note: while the use of a hashed password is better than
+#plain text, the use of this feature is not ideal and poses a security risk. 
+#password is: demo_password
 preserve_hostname: false
 hostname: ${hostname}
 fqdn: ${hostname}.example.com

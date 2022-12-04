@@ -2,7 +2,7 @@
 	Copyright (C) 2022 Sovereign Cloud Australia Pty. Ltd.
 	All rights reserved.
 */
-    
+#Using PDCE sovereignty zone 1, not AWS   
     skip_credentials_validation = true
 
     skip_metadata_api_check = true

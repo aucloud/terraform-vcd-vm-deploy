@@ -7,7 +7,7 @@ on:
 jobs:
   # Chosen to have each of the jobs independent. Bulkier but faster.
   validate_code:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     environment: demo
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -23,8 +23,6 @@ jobs:
       # Next 3 steps run tflint which enforces style guides
       - uses: terraform-linters/setup-tflint@v2
         name: Setup TFLint
-        with:
-          tflint_version: v0.36.2 # latest
 
       - name: Init TFLint
         run: tflint --init
