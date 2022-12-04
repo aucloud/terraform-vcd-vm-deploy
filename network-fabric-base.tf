@@ -50,7 +50,7 @@ resource "vcd_nsxt_ip_set" "External-Source" {
   description = "IP Set for DNAT External Source"
 
   ip_addresses = [
-    "${var.network_public_ip}"
+    var.network_public_ip
   ]
 }
 resource "vcd_nsxt_ip_set" "vip_ipset" {
