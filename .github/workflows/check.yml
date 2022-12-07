@@ -3,7 +3,8 @@ name: Check terraform code
 
 on:
   pull_request:
-
+  # this is only manually triggered.
+  workflow_dispatch:
 jobs:
   # Chosen to have each of the jobs independent. Bulkier but faster.
   validate_code:
