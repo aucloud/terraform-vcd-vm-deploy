@@ -51,7 +51,7 @@ data "terraform_remote_state" "apache" {
 
     endpoint = "https://s3-esz101.australiacloud.com.au"
 
-    region = "us-east-1" #mandatory for the provider, does not get used.
+    region = "us-east-1" #mandatory for the provider, not in use.
 
     bucket = "terraform-demo"
 
