@@ -3,12 +3,12 @@
 	All rights reserved.
 */
 #Please create the catalog and ensure template is available before attempting to build.
-org                = "aucloud-demo"
-vdc                = "terraform-demo"
+org                = "PleaseUseOrgNameHere"
+vdc                = "PleaseUseVDCNameHere"
 url                = "https://api-vcd-sz101.eportal.australiacloud.com.au/api"
-edge_gateway       = "terraform-demo ESGW"
-network_public_ip  = "103.74.201.22"
-network_public_vip = "103.74.201.23"
+edge_gateway       = "PleaseUseEdgeGatewayHere"
+network_public_ip  = ""
+network_public_vip = ""
 network_addr       = "10.100.0"
 vm_image           = "Ubuntu20-Mini"
 vm_name            = "demo-vm"
