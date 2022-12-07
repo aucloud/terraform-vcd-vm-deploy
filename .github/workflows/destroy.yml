@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  stage:
+  destroy:
     runs-on: ubuntu-latest
     environment: demo
     env:

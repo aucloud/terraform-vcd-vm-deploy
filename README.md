@@ -51,14 +51,6 @@ It makes a number of assumptions
 1. Single terraform state file / workflow
 2. You have successfully managed to avoid using [provisioners](https://www.terraform.io/language/resources/provisioners/syntax), some of which require relaxation of the checks
 
-
-A number of enhancements will be staged (most likely as separate repos)
-
-1. Dev-Test-Prod workflows
-2. Branch based builds
-3. CBDB / change request integration
-
-
 ### Key references
 - [Terraform overview](https://www.terraform.io/intro)
 - [VCD Terraform docs](https://registry.terraform.io/providers/vmware/vcd/latest/docs)
@@ -134,9 +126,8 @@ With Secret server integration being broken - this section has been updated.
 
 Github secrets can be used for all secrets required. It's recommended that github secrets are used unless Hashicorp vault is avaiable.
 1. Backend s3 access
-2. ~~Thycotic secret server access~~ Not available.
-3. Variables which change based on different target environments (e.g. VCD URLs)
-4. Access tokens and other github related credentials
+2. Variables which change based on different target environments (e.g. VCD URLs)
+3. Access tokens and other github related credentials
 
 ### Adding github secrets
 Github secrets is a way to provide (primarily) credentials required for the github actions workflows.
@@ -155,8 +146,9 @@ Here you can see credentials added for s3, Thycotic secret server, and github (t
 In order to conduct local development and testing (e.g. running `terraform plan` a subset of the secrets will need to be made available to that development environment.
 
 Users should aim to conduct the majority of dev via github actions workflows, rather than local development.
-### S3 access for state storage
-In order to use s3 for the backend the s3 credentials as environmental variables:
+### object storage
+In order to use s3 (aucloud StaaS) for the backend, credentials referenced by environmental variables:
+Please note this is using aucloud StaaS.
 
 - `AWS_ACCESS_KEY_ID`
 - `AWS_SECRET_ACCESS_KEY`
