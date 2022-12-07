@@ -3,7 +3,6 @@ name: Check terraform code
 
 on:
   pull_request:
-  # this is only manually triggered.
   workflow_dispatch:
 jobs:
   # Chosen to have each of the jobs independent. Bulkier but faster.
@@ -20,16 +19,6 @@ jobs:
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: "1.2.1"
-
-      # Next 3 steps run tflint which enforces style guides
-      # - uses: terraform-linters/setup-tflint@v2
-      #   name: Setup TFLint
-
-      # - name: Init TFLint
-      #   run: tflint --init
-
-      # - name: Run TFLint 
-      #   run: tflint -f default
 
       # This enforces consistent formatting of the terraform codebase. 
       - name: Terraform format
