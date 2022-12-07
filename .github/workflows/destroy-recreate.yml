@@ -33,4 +33,4 @@ jobs:
         with:
           token: ${{ secrets.WRITE_ACCESS_TOKEN }} # this is a github personal access token with the correct rights.
           repository: demos/terraform-vcd-template
-          event-type: apply-terraform-demo
+          event-type: build-terraform-demo
