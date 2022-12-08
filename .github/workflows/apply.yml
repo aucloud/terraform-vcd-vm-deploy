@@ -17,11 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     # Environments are not required for this workflow, however, are used for future proofing
     environment: demo
-    # Env exposes environmental variables, such as secrets, to each of the steps below. This can be set for all steps here, or within each step.
+    # Env exposes environmental variables, such as secrets from github, to each of the steps below. This can be set for all steps here, or within each step
     env:
-      # access keys for cloudian required 
+      # Access keys for cloudian required 
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Credentials from tenancy
       TF_VAR_user: ${{ secrets.VCD_USER }}
       TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
 
