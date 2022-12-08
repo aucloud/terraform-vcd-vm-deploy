@@ -125,7 +125,7 @@ Status checks can only be configured once your pipelines are discovered by githu
 With Secret server integration being broken - this section has been updated.
 
 Github secrets can be used for all secrets required. It's recommended that github secrets are used unless Hashicorp vault is avaiable.
-1. Backend s3 access
+1. Object storage access
 2. Variables which change based on different target environments (e.g. VCD URLs)
 3. Access tokens and other github related credentials
 
@@ -137,7 +137,7 @@ Github actions can add credentials as:
 2. For the repository irrespective of the environment.
 3. For an organisation (currently unused).
 
-Here you can see credentials added for s3, Thycotic secret server, and github (to trigger workflows).
+Here you can see credentials added for object storage,  and github (to trigger workflows).
 
 ![](./docs/secrets.png)
 
@@ -147,7 +147,7 @@ In order to conduct local development and testing (e.g. running `terraform plan`
 
 Users should aim to conduct the majority of dev via github actions workflows, rather than local development.
 ### object storage
-In order to use s3 (aucloud StaaS) for the backend, credentials referenced by environmental variables:
+In order to use object storage (aucloud StaaS) for the backend, credentials referenced by environmental variables:
 Please note this is using aucloud StaaS.
 
 - `AWS_ACCESS_KEY_ID`
@@ -247,7 +247,7 @@ If a destroy run fail:
    1. Some resources may not be correctly coded into the DAG resulting in problems with destructions
 2. If all else fails
    1. Manually delete / cleanup resources on the target system.
-   2. Remove the state file manually (delete) from the s3 bucket.
+   2. Remove the state file manually (delete) from object storage.
 
 
 
