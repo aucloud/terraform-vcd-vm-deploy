@@ -40,9 +40,6 @@ It executes a simple trunk based development workflow where:
 3. Deletion workflows are manual. 
 
 
-# WARNING
-When using the 'use this template' button it *DOES NOT* copy the relevant github settings or secrets below.
-
 ### Caveats
 This project provides the *minimum* set of security; and management policies in order to manage your workflow in terraform.
 
@@ -121,8 +118,6 @@ Status checks can only be configured once your pipelines are discovered by githu
 
 ## Secrets & github secrets for terraform
 
-**Updated guidance**
-With Secret server integration being broken - this section has been updated.
 
 Github secrets can be used for all secrets required. It's recommended that github secrets are used unless Hashicorp vault is avaiable.
 1. Object storage access
