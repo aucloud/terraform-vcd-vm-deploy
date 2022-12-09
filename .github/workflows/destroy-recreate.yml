@@ -1,0 +1,41 @@
+---
+name: ONLY destroy the resources managed by terraform
+
+on:
+  # this is only manually triggered.
+  workflow_dispatch:
+
+jobs:
+  destroy-recreate:
+    runs-on: ubuntu-latest
+    # Environments are not required for this workflow, however, are used for future proofing
+    environment: demo
+    # Env exposes environmental variables, such as secrets from github, to each of the steps below. This can be set for all steps here, or within each step
+    env:
+      # access keys for cloudian required
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      # Credentials from tenancy
+      TF_VAR_user: ${{ secrets.VCD_USER }}
+      TF_VAR_password: ${{ secrets.VCD_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.2.1"
+    
+      - name: Terraform Init
+        run: terraform init -backend-config=backend.hcl
+
+      # This destroys everything. use -target to destroy specific resources in workflow
+      - name: Terraform destroy
+        run: terraform destroy -auto-approve
+
+      # this hook recreates 
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.WRITE_ACCESS_TOKEN }} # this is a github personal access token with the correct rights
+          repository: demos/terraform-vcd-template
+          event-type: build-terraform-demo
