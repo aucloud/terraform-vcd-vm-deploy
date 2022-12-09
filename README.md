@@ -39,6 +39,7 @@ It executes a simple trunk based development workflow where:
 2. On merge of of a PR to main `terraform apply` is performed to achieve the desired state
 3. Deletion workflows are manual. 
 
+
 ### Caveats
 This project provides the *minimum* set of security; and management policies in order to manage your workflow in terraform.
 
