@@ -1,8 +1,9 @@
 
 # terraform-vcd-template
-This is a template to perform a simple deployment of a ubuntu virtual machine into the AUCloud infrastructure, install and turn on apache web server, and present the default apache landing page out via https.
+This is a template to perform a simple deployment of a ubuntu virtual machine into the AUCloud IaaS platform (VCloud Director), install and turn on apache web server, and present the default apache landing page out via https.
 
-This requires that your tenancy has object storage enabled, and that the account used to login to VCD is an 'organisational administrator'.
+
+This requires that your tenancy has object storage enabled, and that the account used to login to VCD is an 'organizational administrator'.
 
 The project is setup with automation based on [Github actions](https://docs.github.com/en/actions). This can be ported with minimal changes to other CICD environments.
 
