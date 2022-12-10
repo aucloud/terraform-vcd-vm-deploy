@@ -15,14 +15,15 @@
 
 */
 
-    skip_credentials_validation = true // Using PDCE sovereignty zone 1, not AWS
+    skip_credentials_validation = true // Required to work with OSE
 
-    skip_metadata_api_check = true // Using PDCE sovereignty zone 1, not AWS
+    skip_metadata_api_check = true // Required to work with OSE
 
-    endpoint = "https://s3-esz101.australiacloud.com.au" // PDCE Cloudian direct endpoint
+
+    endpoint = "https://s3-esz101.australiacloud.com.au" // PDCE Cloudian, SZ1 direct endpoint. Other endpoints may be
 
     region = "us-east-1" // Not used leave as default
 
-    bucket = "terraform-demo"
+    bucket = "example" // This should be reconfigured with your bucket
 
     key = "apache-demo/apache-terraform.tfstate"
