@@ -19,5 +19,3 @@ The project maintainers use LGTM (Looks Good To Me) in comments on the code
 review to indicate acceptance. A change requires LGTMs from one of the maintainers.
 
 For a list of the maintainers, see the [maintainers](https://github.com/aucloud/terraform-vcd-template/blob/main/MAINTAINERS.md) page.
-
-
