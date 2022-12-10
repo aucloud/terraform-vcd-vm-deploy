@@ -107,7 +107,7 @@ If you are worried about edits
 
 ![](./docs/destroy_workflows.png)
 
-If a destroy run fail:
+If a destroy run fails:
 1. Try to repeatedly run destroy.
    1. Some resources may not be correctly coded into the DAG resulting in problems with destructions
 2. If all else fails
