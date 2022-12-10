@@ -1,5 +1,5 @@
 
-# terraform-vcd-template
+# terraform-vcd-vm-deploy
 This is a template to perform a simple deployment of a ubuntu virtual machine into the AUCloud IaaS platform (VCloud Director), install and turn on apache web server, and present the default apache landing page out via https.
 
 
