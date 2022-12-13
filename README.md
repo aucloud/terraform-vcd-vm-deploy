@@ -28,7 +28,7 @@ Two manual only workflows exist:
 - A [destroy workflow, which triggers recreation of resources afterwards](.github/workflows/destroy-recreate.yml), which can be used for refreshing.
 
 ## Making it work for your environment
-This project requires a number of elements in order for this to work within an AUCloud tenancy
+This project requires a number of elements in order for this to work within an AUCloud tenancy:
 
 
 ### Upload a Ubuntu cloud image into a catalog
@@ -73,6 +73,15 @@ users:
     ssh-authorized-keys:
       - # SSH key here; or variable to pass in the key from a terraform variable.
 ```
+
+### Code configuration changes
+
+- `backend.hcl`
+  - Must be updated with references to an object storage bucket and server corresponding to the `AWS_ACCESS_KEY_ID` and secret provided.
+- `demo.auto.tfvars`
+   - Most if not all variables will need to be updated
+All other files are derived from these variables; and the environmental variables set in the github actions pipeline.
+
 
 ## Reference links
 
