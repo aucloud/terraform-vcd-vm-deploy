@@ -38,25 +38,3 @@ data "vcd_nsxt_app_port_profile" "HTTPS" {
   scope = "SYSTEM"
   name  = "HTTPS"
 }
-
-data "terraform_remote_state" "apache" {
-
-  backend = "s3"
-
-  config = {
-
-    skip_credentials_validation = true
-
-    skip_metadata_api_check = true
-
-    endpoint = "https://s3-esz101.australiacloud.com.au"
-
-    region = "us-east-1" #mandatory for the provider, not in use.
-
-    bucket = "terraform-demo"
-
-    key = "apache-demo/apache-terraform.tfstate"
-
-  }
-
-}
