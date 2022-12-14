@@ -44,7 +44,7 @@ Five github secrets are required to be set. The workflows are pre-configured ass
 
 - `AWS_ACCESS_KEY_ID`: Object storage access key - can be generated from the VCLoud Object Storage Extension
 - `AWS_SECRET_ACCESS_KEY`: Object secret access key - can be generated from the VCLoud Object Storage Extension
-- `VCD_USER`: VCD username. Takes the form of, in aucloud of `{user-id}@{tenancy-id}` e.g. `100.0@sz000-00-00`.
+- `VCD_USER`: VCD username - not including the tenancy e.g. 100.0 of the 100.0@sz101-00-00
 - `VCD_PASSWORD`: Your VCD password
 - `WRITE_ACCESS_TOKEN`: A write access token, for the repository administrator, with the ability to execute actions workflows.
 -
