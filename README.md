@@ -28,7 +28,7 @@ Two manual only workflows exist:
 - A [destroy workflow, which triggers recreation of resources afterwards](.github/workflows/destroy-recreate.yml), which can be used for refreshing.
 
 ## Making it work for your environment
-This project requires a number of elements in order for this to work within an AUCloud tenancy:
+This project requires a number of elements in order for this to work within an AUCloud tenancy
 
 
 ### Upload a Ubuntu cloud image into a catalog
@@ -36,22 +36,21 @@ This project requires a number of elements in order for this to work within an A
 The catalog name and image name will need to be updated in the [tfvars](demo.auto.tfvars) file.
 
 ### Setting TFVars
-Each of the variables in the `demo.auto.tfvars` file
+Each of the variables in [`demo.auto.tfvars`](demo.auto.tfvars)
 
 
 ### Required Github Secrets
-Five github secrets are required to be set. The workflows are pre-configured assuming an github secrets environment exist called `demo`.
+Github [secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets) are required to be set. The workflows are pre-configured assuming an github secrets environment exist called `demo`.
 
 - `AWS_ACCESS_KEY_ID`: Object storage access key - can be generated from the VCLoud Object Storage Extension
 - `AWS_SECRET_ACCESS_KEY`: Object secret access key - can be generated from the VCLoud Object Storage Extension
-- `VCD_USER`: VCD username - not including the tenancy e.g. 100.0 of the 100.0@sz101-00-00
+- `VCD_USER`: VCD username. Takes the form of, in aucloud of `{user-id}@{tenancy-id}` e.g. `100.0@sz000-00-00`.
 - `VCD_PASSWORD`: Your VCD password
-- `WRITE_ACCESS_TOKEN`: A write access token, for the repository administrator, with the ability to execute actions workflows.
--
+
 ### Setting a different password for cloud init
 Cloud-init is used to set the user password, update the system, and install apache http server.
 
-The [user password](https://github.com/aucloud/terraform-vcd-template/blob/main/cloudinit/userdata.tmpl#L19), is stored salted and hashed. The default in this demonstration repo is `demo_password`.
+The [user password](https://github.com/aucloud/terraform-vcd-template/blob/main/cloudinit/userdata.tmpl#L19), is stored salted and hashed. The default in this demonstration repo is `demo`,`demo_password`.
 
 **THIS PASSWORD MUST BE CHANGED**
 
@@ -73,15 +72,6 @@ users:
     ssh-authorized-keys:
       - # SSH key here; or variable to pass in the key from a terraform variable.
 ```
-
-### Code configuration changes
-
-- `backend.hcl`
-  - Must be updated with references to an object storage bucket and server corresponding to the `AWS_ACCESS_KEY_ID` and secret provided.
-- `demo.auto.tfvars`
-   - Most if not all variables will need to be updated
-All other files are derived from these variables; and the environmental variables set in the github actions pipeline.
-
 
 ## Reference links
 
@@ -111,23 +101,12 @@ If you are worried about edits
 1. Attempt the destroy the resources
    1. Two pipelines are provided for running terraform destroy.
       1. One destroys and leaves it empty
-      2. One destroys then triggers recreation of the resources
-   2. Use the Workflow dispatch button to ensure code is up to date; and a unique github actions run is recoreded.
-
-![](./docs/destroy_workflows.png)
+      1. One destroys then triggers recreation of the resources
+   1. Use the Workflow dispatch button to ensure code is up to date; and a unique github actions run is recoreded.
 
 If a destroy run fails:
 1. Try to repeatedly run destroy.
    1. Some resources may not be correctly coded into the DAG resulting in problems with destructions
-2. If all else fails
+1. If all else fails
    1. Manually delete / cleanup resources on the target system.
-   2. Remove the state file manually (delete) from object storage.
-
-
-
-
-
-
-
-
-
+   1. Remove the state file manually (delete) from object storage.
