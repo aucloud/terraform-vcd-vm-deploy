@@ -20,7 +20,21 @@
     The files are broken down in a best practice way.
 */
 
+// This is required as there is a race condition in destroy which does not appaer to be resolvable.
+// Appears to be due to VMs not cleaning out NIC connections in time.
+resource "time_sleep" "destroy_minute" {
+  depends_on = [
+    vcd_network_routed_v2.Network
+  ]
+
+  destroy_duration = "60s"
+}
+
 resource "vcd_vapp_vm" "demo_vm" {
+  depends_on = [
+    time_sleep.destroy_minute
+
+  ]
   name          = var.vm_name
   vapp_name     = vcd_vapp.network_app.name
   catalog_name  = var.catalog_name
