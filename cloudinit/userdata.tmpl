@@ -19,9 +19,21 @@ users:
     passwd: $6$rounds=4096$zd4WV1g8M$3N3ZKloSku6.4YiyhdCzceYeYr0bPHybgGDMX1lCItqDQmwO1AZtskj.xjr5z23pFFkTBmRZ8Rf5voK5Kq7a00
     sudo:  ALL=(ALL) NOPASSWD:ALL
 
-final_message: "System initialisation finished after $UPTIME seconds"
 
-power_state:
- delay: now
- mode: poweroff
- condition: True
+write_files:
+  - content: |
+      <html>
+      <head>
+      <title>Hello from AUCloud!</title>
+      </head>
+      <body>
+      <h1>Hello from AUCloud!</h1>
+      <p>Hi there, this is an AUCloud hosted VM serving a public facing webpage... Automatically :-)</p>
+      </body>
+      </html>
+    path: /var/www/html/index.html 
+
+runcmd:
+ - systemctl restart apache2
+
+final_message: "System initialisation finished after $UPTIME seconds"
