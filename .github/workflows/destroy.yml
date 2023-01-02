@@ -1,5 +1,5 @@
 ---
-name: Only destroy the vms
+name: Destroy all resources created by terraform
 
 on:
   # this is only manually triggered.
