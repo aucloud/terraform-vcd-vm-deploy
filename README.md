@@ -1,7 +1,8 @@
 
 # terraform-vcd-vm-deploy
-This is a template to perform a simple deployment of a ubuntu virtual machine into the AUCloud IaaS platform (VCloud Director), install and turn on apache web server, and present the default apache landing page out via https.
+This is a template to perform a simple deployment of a ubuntu virtual machine into the AUCloud IaaS platform (based on VMware Cloud Director), install and turn on apache web server, and present the default apache landing page.
 
+The demo also uses a [`virtual service`](https://registry.terraform.io/providers/vmware/vcd/latest/docs/resources/nsxt_alb_virtual_service), allowing users to configure TLS termination, load balancing and advanced firewalls.
 
 This requires that your tenancy has object storage enabled, and that the account used to login to VCD is an 'organizational administrator'.
 
