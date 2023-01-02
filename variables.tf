@@ -42,9 +42,7 @@ variable "network_public_vip" {
 variable "network_addr" {
   type = string
 }
-variable "vm_image" {
-  type = string
-}
+
 variable "vm_name" {
   type = string
 }
