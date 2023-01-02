@@ -1,5 +1,5 @@
 ---
-name: Check terraform code
+name: Check terraform code on a pull request
 
 on:
   pull_request:

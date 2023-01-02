@@ -1,5 +1,5 @@
 ---
-name: Destroy Only
+name: Only destroy the vms
 
 on:
   # this is only manually triggered.

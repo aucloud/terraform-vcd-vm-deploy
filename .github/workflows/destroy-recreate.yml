@@ -1,5 +1,5 @@
 ---
-name: ONLY destroy the resources managed by terraform
+name: Destroy all resources and recreate the infra.
 
 on:
   # this is only manually triggered.
