@@ -36,6 +36,7 @@ resource "vcd_vapp_vm" "demo_vm" {
 
   ]
   name          = var.vm_name
+  computer_name = var.vm_name
   vapp_name     = vcd_vapp.network_app.name
   catalog_name  = var.catalog_name
   template_name = var.template_name
