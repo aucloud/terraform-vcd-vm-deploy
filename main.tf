@@ -50,7 +50,6 @@ resource "vcd_vapp_vm" "demo_vm" {
     size_in_mb  = "20480.0"
     bus_number  = 0
     unit_number = 0
-    iops        = 2000
   }
 
   guest_properties = {
